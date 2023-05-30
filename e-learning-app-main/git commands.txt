@@ -1,0 +1,136 @@
+1. git init - to create git configuration in our project, which will generate a ".git" file (hidden)
+2. git config -> will setup username, email and password for the git configuration global and locally, so that it will not ask for pushing the latest code multiple times. commands are below
+3. git config --global user.name "sangram1423"
+4. git config --glibal user.email "technomsangru@gmail.com"
+5. git status -> will show all unstaged files from where you have made the "git init" or where you have ".git" hidden file.
+6. git add file_name -> will add a single file (file_name) into the staging area for commit.
+7. git add . -> . will add all the files/folders which are there in the folder where you made "git init".
+8. git commit -m "first commit" -> will commit all the files/folders to our repository but will not show all files/folders in our repository.
+	-m = message for commit 
+9. git branch -M main -> it will change the 'master' branch name to 'main' branch.
+	-M = will change the branch name
+10. git remote add origin "repository url" -> it will add your codes into the remote repository where you wanted to store all your codes.
+11. git push -u origin master/main -> I have have changed the branch from master to main using "git branch -M main" So I need to use the command for pushing as "git push -u origin main".
+12. git log -> for seeing all our commits into the remote repository.
+13. git log 10 -> will show only latest 10 commits from the remote repository
+
+Q-1-) Suppose I have modified few files and I wanted to push to the remote repository with my personal commits. what should I use commands to push.
+
+git status -> will show all modified files and all unstaged file.
+So I want to add the modified file not unstaged files then use below commands
+git add file_name
+git commit -m "added new file"
+git push  -> will push to origin main/master (it will push only the modified file not the unstaged files)
+
+Q-2) I have 2 staged file but I don't want to make push those 2 files, So I need to do unstage (red color). what command I should execute?
+
+git status -> will show staged files (green color)
+git restore --staged .  -> all files will be moved from staged to unstaged (Note -: if they are not commited and pushed)
+
+git restore --staged file_name -> will do unstage single mentioned file.
+
+Q-3) How "restore" command works as multi purpose? (for unstage / discard changes)
+Ans- : If you do some modification to a file and in your remote repository you have old content file. but you modified in your system. you want to remove those newly modified codes then you should go for 2 commands to fix
+	1.1 either you can use "git add file_name" to add those file and commit and push 
+	1.2 or you can use "git restore file_name" to remove our new changes to the file. it will update with the updated remote repository content.
+
+14. git pull - to get latest code from the master
+15. git clone repository_url -> will download from the github repository to our local computer and start working on the requirement and add -> commit -> push 
+Note-: Some other developer modified some files in github and commited and pushed then we should use the "git pull" to get the latest code.
+16.git help -> will show all commands of git hub.
+17. git help command_name -> will show mentioned command_name functionality to use.
+	e.g-> git help init
+18. git add --a -> also will add the modified files to the staging area.
+
+some conflict case solutions
+----------------------------
+sangrutransient user has changed the file employee.java
+
+Now sangram1423 is trying to change the the same file employee.java and pushing to remote repository.
+then the conflict will come with the employee.java file, like below
+
+<<<<<<< HEAD (sangram1423)
+sangrutransient has modified the same file employee.java which 
+sangram1423 is also changing at the same time with the sangru1423 user.
+======= (sangrutransient)
+Now sangrutransient user is changeing the employee.java file and commiting and pushing.
+>>>>>>> 7e3ac17a2d8ae2753bcd459436f7323701752037
+
+So the "git pull" will conflict the file which has been modified by multiple users same time.
+In that case we need to schedule a meeting with the user and manually arrange the code and commit it with new intregrated code and push the change to remote repository.
+
+we need to remove unwanted codes and integrate both ser code by discus and commit and push the code.
+
+19. git stash -> After doing some changes to make working tree clean by storing our changes to temporary storage, we will use "git stash" command.
+
+use-case for git stash  (back up)
+----------------------
+Manager assigned BUG-121 to fix @9:00 AM
+You have started code changes to the Bug fixing and you commited at 12:00 pm and not completed (partially compltely the bug fix)
+
+By 12:30 PM manager  told that BUG-122 is high priority than BUG-121.
+Park your BUG-121 and fix the BUG-122  first and then fix BUG-121
+
+Answer
+------
+I am commiting and pushing before pulling the latest which has made by sangram1423 user.
+check wether we will get error or not.
+
+I am working on BUG-121 which is patially completed and my manager gave me another work BUG-122 which is having more priority, need to complete the BUG-122 before BUG-121.
+
+In that case we need to use the "git stash" 
+
+before starting the BUG-122 use git stash command, so that it will be stored in a temporary or back up file.
+
+start working on BUG-122 and commit and push changes to remote repo.
+
+again do "git stash apply" to get your old BUG-121 code to continue work on remaining work to complete.
+
+Note: we should not remove the old code and we should not push the BUG-121 code to remote repo to work with BUG-122 priority wise.
+
+
+Git Branches
+--------------------
+->Git branches are used to maintain separate code bases in the repository.
+-> Multiple teams can work parallely using Git Branches concept.
+-> In realtime we will use below branches in repository.
+
+master/main
+develop
+feature
+qa
+uat
+release/prod
+
+Note: We can create any number of branches in one repository
+If you are working on any R&D task, its better to use new branch for R&D, So that existing functionality will not break.
+
+main/master 
+|                  |
+develop    feature
+
+clone particular branch
+-----------------------------------
+to clone default branch (main/ master)
+git clone <repo url>     ---> It will clone from the master/main branch by default
+
+# To clone specific branch 
+git clone -b <branch name> <repo url>   ---> It will clone based on the "branch name url"
+
+pull request (for merging)
+------------------
+Suppose I am working on develop branch and I wanted to merge our changes from develop branch to main branch then we can create a pull request and merge it by using the gut hub web url.
+it will be merged from develop branch to main branch but it will not affect other branches.
+
+Creating pull request from develop branch to main branch for merging our code.
+base branch : main (the branch to which branch to merge)
+compare branch : develop (the branch from where you wanted to merge)
+
+Branch Switch
+----------------------
+git checkout main -> (I am in develop branch) will switch to main branch from develop branch
+
+.gitignore
+---------------
+-> It is a text file which is used to configure files and folders to ignore from git operations
+ex: target folder, .project file, .settings file and .classpath file

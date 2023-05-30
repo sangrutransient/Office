@@ -1,0 +1,60 @@
+<h2 style="text-align: center; color: blue;">student-report</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">&nbsp;</div>
+        <div class="col-md-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Student Id</th>
+                        <th>Student Name</th>
+                        <th>Mathematics</th>
+                        <th>Science</th>
+                        <th>English</th>
+                        <th>Hindi</th>
+                        <th>Social Science</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let score of scores">
+                        <th scope="row">{{score.studentId}}</th>
+                        <td>{{score.studentName}}</td>
+                        <td [ngClass]="getClass(score.mathematics)">{{score.mathematics}}</td>
+                        <td [ngClass]="getClass(score.science)">{{score.science}}</td>
+                        <td [ngClass]="getClass(score.english)">{{score.english}}</td>
+                        <td [ngClass]="getClass(score.hindi)">{{score.hindi}}</td>
+                        <td [ngClass]="getClass(score.socialScience)">{{score.socialScience}}</td>
+                        <td [ngClass]="getClassForResult(score.result)">{{score.result}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">&nbsp;</div>
+        <div class="col-md-8">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td class="table-primary">Score Range : <b>91 - 100</b>: primary</td>
+                    </tr>
+                    <tr>
+                        <td class="table-success">Score Range : <b>60 - 90</b>: success</td>
+                    </tr>
+                    <tr>
+                        <td class="table-info">Score Range : <b>45 - 59</b>: info</td>
+                    </tr>
+                    <tr>
+                        <td class="table-warning">Score Range : <b>35 - 44</b>: warning</td>
+                    </tr>
+                    <tr>
+                        <td class="table-danger">Score Range : <b>00 - 34</b>: danger</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2">&nbsp;</div>
+    </div>
+</div>
